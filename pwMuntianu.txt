@@ -1,0 +1,9 @@
+Project Work:
+
+
+
+perche fare due container: creare un'applicazione divisa, piu modulabile
+
+Create virtual env: 'C:\Python\python.exe -m venv .'
+
+dopo aver fatto la cartella react, va fatto il deployment dentro un server http (apache, node, nginx)
