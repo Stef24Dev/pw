@@ -18,6 +18,7 @@ def readCsvFile(fileName):
 
 #Input: dataframe with the content of the csv file
 #Output: list of dataframe with the informations to draw the graphic
+#    1 cantieri in italia per la fibra (progettazione, esecuzione, terminati)
 def cantieriItaliaFibra(df:pd.DataFrame):
 
     df['Piano fibra (anno)'] = df['Piano fibra (anno)'].fillna(0)
@@ -31,6 +32,7 @@ def cantieriItaliaFibra(df:pd.DataFrame):
 
     return {'In proggettazione': in_progettazione.to_dict(), 'In esecuzione': in_esecuzione.to_dict(), 'Terminati': terminati.to_dict()}
 
+#    2 percentuale presenze fibra e fwa (nessuna, fibra o fwa, entrambe)
 def fibra_fwa_in_italia(df:pd.DataFrame):
     c1_1 = df[(df['Fibra'] == 1) & (df['FWA'] == 1)].shape[0]
     c0_1 = df[(df['Fibra'] == 1) | (df['FWA'] == 1)].shape[0] - c1_1 
@@ -38,12 +40,14 @@ def fibra_fwa_in_italia(df:pd.DataFrame):
 
     return {"Entrambe": c1_1, "Fibra o FWA": c0_1, "Nessuna": c0_0}
 
+#    3 conteggio cantieri aperti e non per fibra e fwa per ogni regione
 def cantieri_fibra_fwa(df:pd.DataFrame):
     fibra_cablata = df[df['Fibra'] == 1]['Regione'].value_counts()
     fwa = df[df['FWA'] == 1]['Regione'].value_counts()
 
     return {'Fibra': fibra_cablata.to_dict(), 'FWA': fwa.to_dict()}
 
+#    4 distribuzione lavori finiti per regione di fibra e fwa
 def cantieri_terminati_fibra_fwa(df:pd.DataFrame):
     fibra_cablata = df[df['Stato Fibra'].str.contains(str_term, na=False)]['Regione'].value_counts() 
     fwa = df[df['Stato FWA'].str.contains(str_term, na=False)]['Regione'].value_counts()
@@ -61,6 +65,7 @@ def regione_specifica(df_geo:pd.DataFrame, region: str):
 
     return df_region
 
+#    5 cantieri in x regione per fwa
 def cantieri_fwa_region(df: pd.DataFrame):
     terminati = df[(df['Stato FWA'].str.contains(str_term, na=False)) & (df['FWA'] != 0)]['Provincia'].value_counts().sort_index()
     in_esecuzione = df[(df['Stato FWA'].str.contains(str_esec, na=False)) & (df['FWA'] != 0)]['Provincia'].value_counts().sort_index()
@@ -68,10 +73,12 @@ def cantieri_fwa_region(df: pd.DataFrame):
 
     return {'In proggettazione': in_progettazione.to_dict(), 'In esecuzione': in_esecuzione.to_dict(), 'Terminati': terminati.to_dict()}
 
+#    6 piani decisi in x regione per fwa in anno
 def cantieri_fwa_region_anno(df: pd.DataFrame):
     totale = df[df['FWA'] == 1]['Piano FWA (anno)'].value_counts()
     return totale.to_dict()
 
+#    7 cantieri in x regione per fwa in determinato anno
 def piani_fwa_region(df: pd.DataFrame, anno: int):
     terminati = df[(df['Stato FWA'].str.contains(str_term, na=False)) & (df['Piano FWA (anno)'] == anno)]['Provincia'].value_counts()
     in_esecuzione = df[(df['Stato FWA'].str.contains(str_esec, na=False)) & (df['Piano FWA (anno)'] == anno)]['Provincia'].value_counts()
@@ -79,6 +86,7 @@ def piani_fwa_region(df: pd.DataFrame, anno: int):
 
     return {'In proggettazione': in_progettazione.to_dict(), 'In esecuzione': in_esecuzione.to_dict(), 'Terminati': terminati.to_dict()}
 
+#    8 cantieri in x regione per fibra in determinato anno
 def piani_fibra_region(df: pd.DataFrame, anno: int):
     terminati = df[(df['Stato Fibra'].str.contains(str_term, na=False)) & (df['Piano fibra (anno)'] == anno)]['Provincia'].value_counts()
     in_esecuzione = df[(df['Stato Fibra'].str.contains(str_esec, na=False)) & (df['Piano fibra (anno)'] == anno)]['Provincia'].value_counts()
@@ -95,7 +103,7 @@ if debug_flag:
     print()
     print(f"Cantiere terminati italia fibra = \n\n{cantieri_terminati_fibra_fwa(readCsvFile(stato_lavori))}")
     print()
-    print(f"Cantieri JSON = {cantieri_fwa_region(readCsvFile(stato_lavori))}")
+    print(f"Cantieri JSON = {cantieri_fwa_region(regione_specifica(readCsvFile(italy_geo), 'Lombardia'))}")
     print()
     print(f"Cantieri fwa region anno = {cantieri_fwa_region_anno(regione_specifica(readCsvFile(italy_geo), 'Lombardia'))}")
     print()

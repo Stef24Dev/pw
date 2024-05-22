@@ -7,3 +7,18 @@ perche fare due container: creare un'applicazione divisa, piu modulabile
 Create virtual env: 'C:\Python\python.exe -m venv .'
 
 dopo aver fatto la cartella react, va fatto il deployment dentro un server http (apache, node, nginx)
+
+Grafici = 
+    1 cantieri in italia per la fibra (progettazione, esecuzione, terminati)
+    2 percentuale presenze fibra e fwa (nessuna, fibra o fwa, entrambe)
+    3 conteggio cantieri aperti e non per fibra e fwa per ogni regione
+    4 distribuzione lavori finiti per regione di fibra e fwa
+
+    5 cantieri in x regione per fwa
+    6 piani decisi in x regione per fwa in anno
+    7 cantieri in x regione per fwa in determinato anno
+    8 cantieri in x regione per fibra in determinato anno
+
+    Tab fibra, tab fwa, tab entrambe
+    oppure
+    tab dove specifichi la regione, e dove è nazionale
