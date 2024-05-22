@@ -25,10 +25,22 @@
 
 .home {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    /* justify-content: center; */
+    /* align-items: center; */
     margin: 5%;
     padding: 5% 10%;
+    border-radius: 25px;
+    background-color: #0192ff;
+    color: white;
+}
+
+.choice {
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    margin: 5%;
+    padding: 1% 10%;
+    padding-bottom: 5%;
     border-radius: 25px;
     background-color: #0192ff;
     color: white;

@@ -5,6 +5,8 @@ import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 //TODO cancellare o mui o bootstrap per il design
+//TODO fare un footer magari, con le mie info, git oppure bo
+//
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(<App />);
