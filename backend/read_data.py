@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Per printare risultati se == True
-debug_flag = True
+debug_flag = False
 
 # Creo le stringhe per filtrare i lavori in base al loro stato, come specificato nel glossario, in ordine
 stato_lavori = 'stato_lavori'
@@ -19,7 +19,7 @@ def readCsvFile(fileName):
 #Input: dataframe with the content of the csv file
 #Output: list of dataframe with the informations to draw the graphic
 #    1 cantieri in italia per la fibra (progettazione, esecuzione, terminati)
-def cantieriItaliaFibra(df:pd.DataFrame):
+def cantieri_italia_fibra(df:pd.DataFrame):
 
     df['Piano fibra (anno)'] = df['Piano fibra (anno)'].fillna(0)
     df['Piano FWA (anno)'] = df['Piano FWA (anno)'].fillna(0)
@@ -95,7 +95,7 @@ def piani_fibra_region(df: pd.DataFrame, anno: int):
     return {'In proggettazione': in_progettazione.to_dict(), 'In esecuzione': in_esecuzione.to_dict(), 'Terminati': terminati.to_dict()}
 
 if debug_flag:
-    print(f"Cantiere italia fibra = \n\n{cantieriItaliaFibra(readCsvFile(stato_lavori))}")
+    print(f"Cantiere italia fibra = \n\n{cantieri_italia_fibra(readCsvFile(stato_lavori))}")
     print()
     print(f"italia fibrac_fwa = \n\n{fibra_fwa_in_italia(readCsvFile(stato_lavori))}")
     print()
