@@ -1,10 +1,12 @@
 from flask import Flask, request
 from read_data import *
+from flask_cors import CORS
 
 # cantieri_fibra_fwa, cantieri_terminati_fibra_fwa, fibra_fwa_in_italia, readCsvFile, cantieri_italia_fibra
 
 
 app = Flask(__name__)
+cors = CORS(app)
 
 file_name = ['stato_lavori', 'italy_geo']
 
