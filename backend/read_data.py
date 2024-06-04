@@ -1,7 +1,8 @@
 import pandas as pd
+import json
 
 # Per printare risultati se == True
-debug_flag = False
+debug_flag = True
 
 # Creo le stringhe per filtrare i lavori in base al loro stato, come specificato nel glossario, in ordine
 stato_lavori = 'stato_lavori'
@@ -15,6 +16,12 @@ str_term = 'terminato|lavori chiusi|in collaudo'
 def readCsvFile(fileName):
     df = pd.read_csv(f'C:/Users/stefan.muntianu/Stage/pw/DatiCSV/{fileName}.csv', sep=';', encoding='UTF-8')
     return df
+
+def get_nazionale():
+    return ['cantieri_italia_fibra', 'fibra_fwa_in_italia', 'cantieri_fibra_fwa', 'cantieri_terminati_fibra_fwa']
+
+def get_regionale():
+    return ['cantieri_fwa_region', 'cantieri_fwa_region_anno', 'piani_fwa_region', 'piani_fibra_region']
 
 #Input: dataframe with the content of the csv file
 #Output: list of dataframe with the informations to draw the graphic
@@ -30,7 +37,20 @@ def cantieri_italia_fibra(df:pd.DataFrame):
     in_esecuzione = df[(df['Stato Fibra'].str.contains(str_esec, na=False)) & (df['Fibra'] != 0)]['Piano fibra (anno)'].value_counts().sort_index()
     in_progettazione = df[(df['Stato Fibra'].str.contains(str_prog, na=False)) & (df['Fibra'] != 0)]['Piano fibra (anno)'].value_counts().sort_index()
 
-    return {'In proggettazione': in_progettazione.to_dict(), 'In esecuzione': in_esecuzione.to_dict(), 'Terminati': terminati.to_dict()}
+    lista = [terminati, in_esecuzione, in_progettazione]
+    keys_len = 0
+    keys = 0
+
+    for i in range(3):
+        if keys_len < len(lista[i]):
+            keys_len = len(lista[i])
+            keys = lista[i]
+
+    my_obj = []
+    for key in keys.keys():
+        my_obj.append({'name': key, 'Terminati': int(terminati.get(key, 0)), 'Esecuzione': int(in_esecuzione.get(key, 0)), 'Progettazione': int(in_progettazione.get(key, 0))})
+
+    return my_obj
 
 #    2 percentuale presenze fibra e fwa (nessuna, fibra o fwa, entrambe)
 def fibra_fwa_in_italia(df:pd.DataFrame):
@@ -45,7 +65,11 @@ def cantieri_fibra_fwa(df:pd.DataFrame):
     fibra_cablata = df[df['Fibra'] == 1]['Regione'].value_counts()
     fwa = df[df['FWA'] == 1]['Regione'].value_counts()
 
-    return {'Fibra': fibra_cablata.to_dict(), 'FWA': fwa.to_dict()}
+    my_obj = []
+    for key in fwa.keys():
+        my_obj.append({'name': key, 'Fibra': int(fibra_cablata[key]), 'FWA': int(fwa[key])})
+    print(my_obj)
+    return my_obj
 
 #    4 distribuzione lavori finiti per regione di fibra e fwa
 def cantieri_terminati_fibra_fwa(df:pd.DataFrame):
@@ -95,18 +119,18 @@ def piani_fibra_region(df: pd.DataFrame, anno: int):
     return {'In proggettazione': in_progettazione.to_dict(), 'In esecuzione': in_esecuzione.to_dict(), 'Terminati': terminati.to_dict()}
 
 if debug_flag:
-    print(f"Cantiere italia fibra = \n\n{cantieri_italia_fibra(readCsvFile(stato_lavori))}")
-    print()
-    print(f"italia fibrac_fwa = \n\n{fibra_fwa_in_italia(readCsvFile(stato_lavori))}")
-    print()
+    # print(f"Cantiere italia fibra = \n\n{cantieri_italia_fibra(readCsvFile(stato_lavori))}")
+    # print()
+    # print(f"italia fibrac_fwa = \n\n{fibra_fwa_in_italia(readCsvFile(stato_lavori))}")
+    # print()
     print(f"Cantiere italia fibra_fwa = \n\n{cantieri_fibra_fwa(readCsvFile(stato_lavori))}")
-    print()
-    print(f"Cantiere terminati italia fibra = \n\n{cantieri_terminati_fibra_fwa(readCsvFile(stato_lavori))}")
-    print()
-    print(f"Cantieri JSON = {cantieri_fwa_region(regione_specifica(readCsvFile(italy_geo), 'Lombardia'))}")
-    print()
-    print(f"Cantieri fwa region anno = {cantieri_fwa_region_anno(regione_specifica(readCsvFile(italy_geo), 'Lombardia'))}")
-    print()
-    print(f"Piani fwa region = {piani_fwa_region(regione_specifica(readCsvFile(italy_geo), 'Lombardia'), 2022)}")
-    print()
-    print(f"Piani fibra region = {piani_fibra_region(regione_specifica(readCsvFile(italy_geo), 'Lombardia'), 2022)}")
+    # print()
+    # print(f"Cantiere terminati italia fibra = \n\n{cantieri_terminati_fibra_fwa(readCsvFile(stato_lavori))}")
+    # print()
+    # print(f"Cantieri JSON = {cantieri_fwa_region(regione_specifica(readCsvFile(italy_geo), 'Lombardia'))}")
+    # print()
+    # print(f"Cantieri fwa region anno = {cantieri_fwa_region_anno(regione_specifica(readCsvFile(italy_geo), 'Lombardia'))}")
+    # print()
+    # print(f"Piani fwa region = {piani_fwa_region(regione_specifica(readCsvFile(italy_geo), 'Lombardia'), 2022)}")
+    # print()
+    # print(f"Piani fibra region = {piani_fibra_region(regione_specifica(readCsvFile(italy_geo), 'Lombardia'), 2022)}")

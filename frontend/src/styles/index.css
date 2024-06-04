@@ -67,3 +67,10 @@
     border-radius: 20px;
     padding: 5%;
 }
+
+.graph{
+    display: flex;
+    justify-content: center;
+    width: 1000px;
+    height: 400px;
+}

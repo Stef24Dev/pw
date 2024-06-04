@@ -1,27 +1,49 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Accordion, Button } from "react-bootstrap";
 import LineGraph from "./graph.tsx";
+import axios from "axios";
 
 export default function Nazionale() {
+    const LOCAL_HOST = 'http://localhost:5000';
+    const URL = LOCAL_HOST +  '/nazionale'
+
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async() => {
+            try{
+                const response = await axios.get(URL);
+                console.log(response.data)
+                setData(response.data);
+            } catch (error){
+                console.error("ERRORE: ", error)
+            }
+        };
+        fetchData();
+    }, [])
+
+    const acordion = (info) => {
+        if (info.length === 0) return null;
+
+        const data = info.map((name:string, index) => {
+            return <Accordion.Item eventKey={index}>
+                <Accordion.Header>{name.charAt(0).toUpperCase() + name.slice(1).split('_').join(' ')}</Accordion.Header>
+                <Accordion.Body>
+                    <LineGraph name={name}/>
+                </Accordion.Body>
+            </Accordion.Item>
+        });
+        return data;
+    }
+
     return <>
         Ciao sono in nazionale
-        <Button onClick={async () => {}}>Ciao</Button>
+        <Button onClick={async () => {console.log("Hello")}}>Ciao</Button>
 
         {/* Si può mettere l'accordion in un div per non estenderlo del tutto */}
 
         <Accordion>
-            <Accordion.Item eventKey='0'>
-                <Accordion.Header>Primo grafico</Accordion.Header>
-                <Accordion.Body>
-                    <LineGraph />
-                </Accordion.Body>
-            </Accordion.Item>
-            <Accordion.Item eventKey='1'>
-                <Accordion.Header>Secondo grafico</Accordion.Header>
-                <Accordion.Body>
-                    Grafico 2
-                </Accordion.Body>
-            </Accordion.Item>
+            {acordion(data)}
         </Accordion>
     </>
 }
