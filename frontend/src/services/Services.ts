@@ -32,3 +32,26 @@ export async function getGraphData(endpoint: string) {
         console.error("Hai un errore: ", error);
     }
 }
+
+export async function postGraphData(endpoint: string, region: string, year: number) {
+    const graphUrl = HOST + endpoint;
+    console.log("chiamata a: ", graphUrl);
+
+    try{
+        const response = await axios.post(graphUrl, {
+            'region': region,
+            'year': year
+        });
+        
+        const formattedData: object[] = Object.keys(response.data).map(status => {
+            return {
+                "name": status,
+                ...response.data[status]
+            };
+        });
+        console.log("Response di getGraphData ", formattedData);
+        return formattedData;
+    } catch (error) {
+        console.error("Errore è = ", error);
+    }
+}

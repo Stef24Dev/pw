@@ -7,7 +7,6 @@ export default function LineGraph( props: {
     endpoint: string
 }) {
     const { endpoint } = props;
-    const HOST = 'http://localhost:5000/';
     const [data, setData] = useState([{}]);
 
     useEffect(() => {

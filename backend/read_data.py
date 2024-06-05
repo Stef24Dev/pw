@@ -105,12 +105,31 @@ def cantieri_fwa_region(df: pd.DataFrame):
     in_esecuzione = df[(df['Stato FWA'].str.contains(str_esec, na=False)) & (df['FWA'] != 0)]['Provincia'].value_counts().sort_index()
     in_progettazione = df[(df['Stato FWA'].str.contains(str_prog, na=False)) & (df['FWA'] != 0)]['Provincia'].value_counts().sort_index()
 
-    return {'In proggettazione': in_progettazione.to_dict(), 'In esecuzione': in_esecuzione.to_dict(), 'Terminati': terminati.to_dict()}
+    lista = [terminati, in_esecuzione, in_progettazione]
+    keys_len = 0
+    keys = 0
+
+    for i in range(3):
+        if keys_len < len(lista[i]):
+            keys_len = len(lista[i])
+            keys = lista[i]
+
+    my_obj = []
+    for key in keys.keys():
+        my_obj.append({'name': key, 'Terminati': int(terminati.get(key, 0)), 'Esecuzione': int(in_esecuzione.get(key, 0)), 'Progettazione': int(in_progettazione.get(key, 0))})
+
+    return my_obj
 
 #    6 piani decisi in x regione per fwa in anno
 def cantieri_fwa_region_anno(df: pd.DataFrame):
     totale = df[df['FWA'] == 1]['Piano FWA (anno)'].value_counts()
-    return totale.to_dict()
+
+    my_obj = []
+
+    for key in totale.keys():
+        my_obj.append({'name': key, 'value': totale[key]})
+    print(my_obj)
+    return my_obj
 
 #    7 cantieri in x regione per fwa in determinato anno
 def piani_fwa_region(df: pd.DataFrame, anno: int):
@@ -118,7 +137,20 @@ def piani_fwa_region(df: pd.DataFrame, anno: int):
     in_esecuzione = df[(df['Stato FWA'].str.contains(str_esec, na=False)) & (df['Piano FWA (anno)'] == anno)]['Provincia'].value_counts()
     in_progettazione = df[(df['Stato FWA'].str.contains(str_prog, na=False)) & (df['Piano FWA (anno)'] == anno)]['Provincia'].value_counts()
 
-    return {'In proggettazione': in_progettazione.to_dict(), 'In esecuzione': in_esecuzione.to_dict(), 'Terminati': terminati.to_dict()}
+    lista = [terminati, in_esecuzione, in_progettazione]
+    keys_len = 0
+    keys = 0
+
+    for i in range(3):
+        if keys_len < len(lista[i]):
+            keys_len = len(lista[i])
+            keys = lista[i]
+
+    my_obj = []
+    for key in keys.keys():
+        my_obj.append({'name': key, 'Terminati': int(terminati.get(key, 0)), 'Esecuzione': int(in_esecuzione.get(key, 0)), 'Progettazione': int(in_progettazione.get(key, 0))})
+
+    return my_obj
 
 #    8 cantieri in x regione per fibra in determinato anno
 def piani_fibra_region(df: pd.DataFrame, anno: int):
@@ -126,12 +158,25 @@ def piani_fibra_region(df: pd.DataFrame, anno: int):
     in_esecuzione = df[(df['Stato Fibra'].str.contains(str_esec, na=False)) & (df['Piano fibra (anno)'] == anno)]['Provincia'].value_counts()
     in_progettazione = df[(df['Stato Fibra'].str.contains(str_prog, na=False)) & (df['Piano fibra (anno)'] == anno)]['Provincia'].value_counts()
 
-    return {'In proggettazione': in_progettazione.to_dict(), 'In esecuzione': in_esecuzione.to_dict(), 'Terminati': terminati.to_dict()}
+    lista = [terminati, in_esecuzione, in_progettazione]
+    keys_len = 0
+    keys = 0
+
+    for i in range(3):
+        if keys_len < len(lista[i]):
+            keys_len = len(lista[i])
+            keys = lista[i]
+
+    my_obj = []
+    for key in keys.keys():
+        my_obj.append({'name': key, 'Terminati': int(terminati.get(key, 0)), 'Esecuzione': int(in_esecuzione.get(key, 0)), 'Progettazione': int(in_progettazione.get(key, 0))})
+
+    return my_obj
 
 if debug_flag:
     # print(f"Cantiere italia fibra = \n\n{cantieri_italia_fibra(readCsvFile(stato_lavori))}")
     # print()
-    print(f"italia fibrac_fwa = \n\n{fibra_fwa_in_italia(readCsvFile(stato_lavori))}")
+    # print(f"italia fibrac_fwa = \n\n{fibra_fwa_in_italia(readCsvFile(stato_lavori))}")
     # print()
     # print(f"Cantiere italia fibra_fwa = \n\n{cantieri_fibra_fwa(readCsvFile(stato_lavori))}")
     # print()
@@ -139,7 +184,7 @@ if debug_flag:
     # print()
     # print(f"Cantieri JSON = {cantieri_fwa_region(regione_specifica(readCsvFile(italy_geo), 'Lombardia'))}")
     # print()
-    # print(f"Cantieri fwa region anno = {cantieri_fwa_region_anno(regione_specifica(readCsvFile(italy_geo), 'Lombardia'))}")
+    print(f"Cantieri fwa region anno = {cantieri_fwa_region_anno(regione_specifica(readCsvFile(italy_geo), 'Lombardia'))}")
     # print()
     # print(f"Piani fwa region = {piani_fwa_region(regione_specifica(readCsvFile(italy_geo), 'Lombardia'), 2022)}")
     # print()
