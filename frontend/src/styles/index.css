@@ -71,6 +71,18 @@
 .graph{
     display: flex;
     justify-content: center;
-    width: 1000px;
-    height: 400px;
+    width: auto;
+    height: 300px;
+}
+
+.containerDiv{
+    display: flex;
+    justify-content: center;
+}
+
+.accordionContainer{
+    /* display: flex; */
+    /* justify-content: center; */
+    padding: 10px;
+    width: 90%;
 }

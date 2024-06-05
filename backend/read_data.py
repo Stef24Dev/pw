@@ -18,10 +18,10 @@ def readCsvFile(fileName):
     return df
 
 def get_nazionale():
-    return ['cantieri_italia_fibra', 'fibra_fwa_in_italia', 'cantieri_fibra_fwa', 'cantieri_terminati_fibra_fwa']
+    return {'cantieri_italia_fibra': 'line', 'fibra_fwa_in_italia': 'pie', 'cantieri_fibra_fwa': 'line', 'cantieri_terminati_fibra_fwa': 'line'}
 
 def get_regionale():
-    return ['cantieri_fwa_region', 'cantieri_fwa_region_anno', 'piani_fwa_region', 'piani_fibra_region']
+    return {'cantieri_fwa_region': 'line', 'cantieri_fwa_region_anno': 'pie', 'piani_fwa_region': 'line', 'piani_fibra_region': 'line'}
 
 #Input: dataframe with the content of the csv file
 #Output: list of dataframe with the informations to draw the graphic
@@ -58,7 +58,13 @@ def fibra_fwa_in_italia(df:pd.DataFrame):
     c0_1 = df[(df['Fibra'] == 1) | (df['FWA'] == 1)].shape[0] - c1_1 
     c0_0 = df[(df['Fibra'] == 0) & (df['FWA'] == 0)].shape[0]
 
-    return {"Entrambe": c1_1, "Fibra o FWA": c0_1, "Nessuna": c0_0}
+    values = {'Entrambe':c1_1, 'Fibra o FWA': c0_1, 'Nessuna': c0_0}
+    my_obj = []
+
+    for key in values.keys():
+        my_obj.append({'name': key, 'value': values[key]})
+    print(my_obj)
+    return my_obj
 
 #    3 conteggio cantieri aperti e non per fibra e fwa per ogni regione
 def cantieri_fibra_fwa(df:pd.DataFrame):
@@ -76,7 +82,11 @@ def cantieri_terminati_fibra_fwa(df:pd.DataFrame):
     fibra_cablata = df[df['Stato Fibra'].str.contains(str_term, na=False)]['Regione'].value_counts() 
     fwa = df[df['Stato FWA'].str.contains(str_term, na=False)]['Regione'].value_counts()
 
-    return {'Fibra': fibra_cablata.to_dict(), 'FWA': fwa.to_dict()}
+    my_obj = []
+    for key in fwa.keys():
+        my_obj.append({'name': key, 'Fibra': int(fibra_cablata[key]), 'FWA': int(fwa[key])})
+    print(my_obj)
+    return my_obj
 
 def regione_specifica(df_geo:pd.DataFrame, region: str):
     df_geo.info()
@@ -121,9 +131,9 @@ def piani_fibra_region(df: pd.DataFrame, anno: int):
 if debug_flag:
     # print(f"Cantiere italia fibra = \n\n{cantieri_italia_fibra(readCsvFile(stato_lavori))}")
     # print()
-    # print(f"italia fibrac_fwa = \n\n{fibra_fwa_in_italia(readCsvFile(stato_lavori))}")
+    print(f"italia fibrac_fwa = \n\n{fibra_fwa_in_italia(readCsvFile(stato_lavori))}")
     # print()
-    print(f"Cantiere italia fibra_fwa = \n\n{cantieri_fibra_fwa(readCsvFile(stato_lavori))}")
+    # print(f"Cantiere italia fibra_fwa = \n\n{cantieri_fibra_fwa(readCsvFile(stato_lavori))}")
     # print()
     # print(f"Cantiere terminati italia fibra = \n\n{cantieri_terminati_fibra_fwa(readCsvFile(stato_lavori))}")
     # print()

@@ -25,6 +25,10 @@ DF_ITALY = get_df_italy(file_name[1])
 def get_nazionale_endPoint():
     return get_nazionale()
 
+@app.route("/regionale")
+def get_regionale_endPoint():
+    return get_regionale()
+
 @app.route("/cantieri_italia_fibra")
 def cantieri_italia_fibra_endPoint():
     return cantieri_italia_fibra(DF_LAVORI)

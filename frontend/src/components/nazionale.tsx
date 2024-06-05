@@ -1,35 +1,38 @@
 import React, { useEffect, useState } from "react";
 import { Accordion, Button } from "react-bootstrap";
-import LineGraph from "./graph.tsx";
+import LineGraph from "./LineGraph.tsx";
 import axios from "axios";
+import PieGraph from "./PieGraph.tsx";
+import { getEndPoints } from "../services/Services.ts";
 
 export default function Nazionale() {
-    const LOCAL_HOST = 'http://localhost:5000';
-    const URL = LOCAL_HOST +  '/nazionale'
-
-    const [data, setData] = useState([]);
+    const [endPoints, setEndpoints] = useState({});
 
     useEffect(() => {
-        const fetchData = async() => {
-            try{
-                const response = await axios.get(URL);
-                console.log(response.data)
-                setData(response.data);
-            } catch (error){
-                console.error("ERRORE: ", error)
+        const fetchData = async () => {
+            const result = await getEndPoints('nazionale');
+            if (result) {
+                setEndpoints(result);
+            } else {
+                setEndpoints([]);
             }
-        };
+        }
         fetchData();
     }, [])
 
-    const acordion = (info) => {
-        if (info.length === 0) return null;
-
-        const data = info.map((name:string, index) => {
-            return <Accordion.Item eventKey={index}>
-                <Accordion.Header>{name.charAt(0).toUpperCase() + name.slice(1).split('_').join(' ')}</Accordion.Header>
+    const acordion = (info:object) => {
+        
+        const keys = Object.keys(info);
+        console.log(keys);
+        
+        if (keys.length === 0) return null;
+        
+        const data = keys.map((key:string) => {
+            {console.log(endPoints[key])}
+            return <Accordion.Item eventKey={key} key={key}>
+                <Accordion.Header>{key.charAt(0).toUpperCase() + key.slice(1).split('_').join(' ')}</Accordion.Header>
                 <Accordion.Body>
-                    <LineGraph name={name}/>
+                    {endPoints[key] === 'line' ? <LineGraph endpoint={key}/> : <PieGraph endpoint={key}/>}
                 </Accordion.Body>
             </Accordion.Item>
         });
@@ -38,30 +41,14 @@ export default function Nazionale() {
 
     return <>
         Ciao sono in nazionale
-        <Button onClick={async () => {console.log("Hello")}}>Ciao</Button>
+        <Button onClick={async () => {console.log("Hello ", endPoints)}}>Ciao</Button>
 
-        {/* Si può mettere l'accordion in un div per non estenderlo del tutto */}
-
-        <Accordion>
-            {acordion(data)}
-        </Accordion>
+        <div className="containerDiv">
+            <div className="accordionContainer">
+                <Accordion>
+                    {acordion(endPoints)}
+                </Accordion>
+            </div>
+        </div>
     </>
 }
-
-// TODO: al posto del console.log sarebbe perfetto fare la chiamata API e quando si apre stampare un icona di caricamento finchè non si crea il grafico
-
-// function CustomToggle({ children, eventKey }) {
-//     const decoratedOnClick = useAccordionButton(eventKey, () =>
-//       console.log('totally custom!'),
-//     );
-  
-//     return (
-//       <button
-//         type="button"
-//         style={{ backgroundColor: 'pink' }}
-//         onClick={decoratedOnClick}
-//       >
-//         {children}
-//       </button>
-//     );
-//   }

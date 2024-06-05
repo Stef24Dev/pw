@@ -1,8 +1,8 @@
 import React from 'react';
 import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
-import Nazionale from './nazionale.tsx';
-import Regionale from './regionale.tsx';
+import Nazionale from './Nazionale.tsx';
+import Regionale from './Regionale.tsx';
 
 export default function Navbar() {
   return (

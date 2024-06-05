@@ -4,11 +4,6 @@ import Row from "react-bootstrap/esm/Row";
 import Container from 'react-bootstrap/Container';
 import { Link } from 'react-router-dom';
 
-
-function Choice(choice:string) {
-    console.log(`Pulsante premuto sulla scelta: ${choice}`)
-}
-
 export default function Home() {
     return <>            
         <Container className="home">
