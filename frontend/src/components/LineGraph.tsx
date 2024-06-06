@@ -31,16 +31,14 @@ export default function LineGraph( props: {
             return <Bar 
             dataKey={key}
             key={key}
-            fill= {colors[index % colors.length]}
-            activeBar={<Rectangle fill="pink" stroke="blue" />} 
-            />
+            fill= {colors[index % colors.length]}/>
         })
         return Bars
     }
 
     return <>
         <div className='graph'> 
-            <ResponsiveContainer width={"100%"} height={"90%"}>       
+            <ResponsiveContainer width={"100%"} height={"100%"}>       
                 <BarChart
                     data={data}
                     margin={{
@@ -51,7 +49,7 @@ export default function LineGraph( props: {
                     }}
                     >
                     <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey={'name'} textAnchor={'end'} interval={0} angle= {-40} />
+                    <XAxis dataKey={'name'} textAnchor={'end'} interval={0} angle= {-40}/>
                     <YAxis />
                     <Tooltip shared={false} trigger={"click"} />
                     <Legend 

@@ -11,6 +11,7 @@ export async function getEndPoints(property: string) {
         return response.data;
     } catch (error){
         console.error("ERRORE: ", error);
+        return error;
     }
 }
 
