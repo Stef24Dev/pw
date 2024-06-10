@@ -7,7 +7,6 @@ export async function getEndPoints(property: string) {
 
     try{
         const response = await axios.get(URL);
-        console.log("Response di getEndPoint ", response.data);
         return response.data;
     } catch (error){
         console.error("ERRORE: ", error);
@@ -34,15 +33,20 @@ export async function getGraphData(endpoint: string) {
     }
 }
 
-export async function postGraphData(endpoint: string, region: string, year: number) {
+export async function postGraphData(endpoint: string, region: string, year?: number) {
     const graphUrl = HOST + endpoint;
-    console.log("chiamata a: ", graphUrl);
+
+    const requestBody = {
+        region: region,
+    }
+
+    if (year !== undefined){
+        requestBody['year'] = Number(year);
+    }
 
     try{
-        const response = await axios.post(graphUrl, {
-            'region': region,
-            'year': year
-        });
+        console.log("graph ", graphUrl, " reqyest ", requestBody)
+        const response = await axios.post(graphUrl, requestBody);
         
         const formattedData: object[] = Object.keys(response.data).map(status => {
             return {
@@ -50,7 +54,7 @@ export async function postGraphData(endpoint: string, region: string, year: numb
                 ...response.data[status]
             };
         });
-        console.log("Response di getGraphData ", formattedData);
+        console.log("Response di getGraphData ", formattedData, " per url: ", graphUrl, " con anno ", year);
         return formattedData;
     } catch (error) {
         console.error("Errore è = ", error);

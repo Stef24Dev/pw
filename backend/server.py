@@ -48,9 +48,13 @@ def cantieri_terminati_fibra_fwa_endPoint():
 @app.route("/cantieri_fwa_region", methods=['POST'])
 def cantieri_fwa_region_endPoint():
     if request.method == 'POST':
-        region = request.form['region']
+        data = request.get_json()
+        region = data.get('region')
+        year = data.get('year')
     else:
         region = ''
+
+    print(f'la mia regione è: {region}')
 
     df = regione_specifica(DF_ITALY, region)
     return cantieri_fwa_region(df)
@@ -58,7 +62,9 @@ def cantieri_fwa_region_endPoint():
 @app.route("/cantieri_fwa_region_anno", methods=['POST'])
 def cantieri_fwa_region_anno_endPoint():
     if request.method == 'POST':
-        region = request.form['region']
+        data = request.get_json()
+        region = data.get('region')
+        year = data.get('year')
     else:
         region = ''
 
@@ -68,21 +74,25 @@ def cantieri_fwa_region_anno_endPoint():
 @app.route("/piani_fwa_region", methods=['POST'])
 def piani_fwa_region_endPoint():
     if request.method == 'POST':
-        region = request.form['region']
-        year = request.form['year']
+        data = request.get_json()
+        region = data.get('region')
+        year = data.get('year')
     else:
         region = ''
 
-    df = regione_specifica(DF_ITALY, region, year)
-    return piani_fwa_region(df)
+    print(f"region {region}, year {year}")
+
+    df = regione_specifica(DF_ITALY, region)
+    return piani_fwa_region(df, year)
 
 @app.route("/piani_fibra_region", methods=['POST'])
 def piani_fibra_region_endPoint():
     if request.method == 'POST':
-        region = request.form['region']
-        year = request.form['year']
+        data = request.get_json()
+        region = data.get('region')
+        year = data.get('year')
     else:
         region = ''
 
-    df = regione_specifica(DF_ITALY, region, year)
-    return piani_fibra_region(df)
+    df = regione_specifica(DF_ITALY, region)
+    return piani_fibra_region(df, year)

@@ -1,16 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
-import { getGraphData } from '../services/Services.ts';
+import { getGraphData, postGraphData } from '../services/Services.ts';
 
 export default function PieGraph( props: { 
-    endpoint: string
+    endpoint: string,
+    region?: string,
+    year?: number
 }) {
-    const { endpoint } = props;
+    const { endpoint, region, year } = props;
     const [data, setData] = useState([{}]);
 
     useEffect(() => {
         const fetchData = async () => {
-            const result = await getGraphData(endpoint);
+            let result;
+
+            if(region === undefined){
+                result = await getGraphData(endpoint);
+            } else {
+                result = await postGraphData(endpoint, region, year);
+            }
+
             if (result) {
                 setData(result);
             } else {
@@ -18,7 +27,7 @@ export default function PieGraph( props: {
             }
         }
         fetchData();
-    }, []);
+    }, [endpoint, region, year]);
 
     const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
     const COLORS_NAME = ['blue', 'green', 'yellow', 'orange'];

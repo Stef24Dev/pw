@@ -127,7 +127,7 @@ def cantieri_fwa_region_anno(df: pd.DataFrame):
     my_obj = []
 
     for key in totale.keys():
-        my_obj.append({'name': key, 'value': totale[key]})
+        my_obj.append({'name': key, 'value': int(totale.get(key, 0))})
     print(my_obj)
     return my_obj
 
@@ -146,8 +146,11 @@ def piani_fwa_region(df: pd.DataFrame, anno: int):
             keys_len = len(lista[i])
             keys = lista[i]
 
+    print(keys)
+
     my_obj = []
     for key in keys.keys():
+        print("entro")
         my_obj.append({'name': key, 'Terminati': int(terminati.get(key, 0)), 'Esecuzione': int(in_esecuzione.get(key, 0)), 'Progettazione': int(in_progettazione.get(key, 0))})
 
     return my_obj
@@ -184,8 +187,8 @@ if debug_flag:
     # print()
     # print(f"Cantieri JSON = {cantieri_fwa_region(regione_specifica(readCsvFile(italy_geo), 'Lombardia'))}")
     # print()
-    print(f"Cantieri fwa region anno = {cantieri_fwa_region_anno(regione_specifica(readCsvFile(italy_geo), 'Lombardia'))}")
+    # print(f"Cantieri fwa region anno = {cantieri_fwa_region_anno(regione_specifica(readCsvFile(italy_geo), 'Lombardia'))}")
     # print()
-    # print(f"Piani fwa region = {piani_fwa_region(regione_specifica(readCsvFile(italy_geo), 'Lombardia'), 2022)}")
+    print(f"Piani fwa region = {piani_fwa_region(regione_specifica(readCsvFile(italy_geo), 'Lombardia'), 2022)}")
     # print()
     # print(f"Piani fibra region = {piani_fibra_region(regione_specifica(readCsvFile(italy_geo), 'Lombardia'), 2022)}")

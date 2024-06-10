@@ -1,17 +1,25 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { getGraphData } from '../services/Services.ts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { getGraphData, postGraphData } from '../services/Services.ts';
 
 export default function LineGraph( props: { 
-    endpoint: string
+    endpoint: string,
+    region?: string,
+    year?: number
 }) {
-    const { endpoint } = props;
+    const { endpoint, region, year } = props;
     const [data, setData] = useState([{}]);
 
     useEffect(() => {
         const fetchData = async () => {
-            const result = await getGraphData(endpoint);
+            let result;
+
+            if(region === undefined){
+                result = await getGraphData(endpoint);
+            } else {
+                result = await postGraphData(endpoint, region, year);
+            }
+
             if (result) {
                 setData(result);
             } else {
@@ -19,7 +27,7 @@ export default function LineGraph( props: {
             }
         }
         fetchData();
-    }, []);
+    }, [region, year]);
 
     const bars = (data) => {
         if (data.length === 0) return null;

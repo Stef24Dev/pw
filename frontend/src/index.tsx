@@ -8,6 +8,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // TODO fare un footer magari, con le mie info, git oppure bo
 // TODO gestire quando una chiamata api non riesce (se no non si caricano nemmeno le pagine) --> tipo modal --> Done
 // TODO Grafico a torta in modalità mobile non si vedono le scritte
+// TODO abbassare la legenda perche nel region va sopra la legenda
+// TODO togliere year dalle post in cui non serve in flask 
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(<App />);
