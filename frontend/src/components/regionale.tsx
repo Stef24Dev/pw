@@ -4,14 +4,20 @@ import { Accordion } from "react-bootstrap";
 import LineGraph from "./LineGraph.tsx";
 import PieGraph from "./PieGraph.tsx";
 import MyDropdown from "./Dropdown.tsx";
+import { getProperties } from "../services/Services.ts";
 
 export default function Regionale() {
     const HOST = 'http://localhost:5000/';
     const URL = HOST +  'regionale'
     const [endPoints, setEndpoints] = useState({});
-    
-    const years = [2020, 2021, 2022, 2023, 2024]; // Anni disponibili nel dropdown
-    const [selectedYear, setSelectedYear] = useState(); // Imposta l'anno iniziale
+    const [selectedYear, setSelectedYear] = useState();
+
+    const components = [
+        <LineGraph endpoint={'cantieri_fwa_region'} region={'Lombardia'}/>,
+        <PieGraph endpoint={'cantieri_fwa_region_anno'} region={'Lombardia'}/>,
+        <LineGraph endpoint={'piani_fwa_region'} region={'Lombardia'} year={selectedYear}/>,
+        <LineGraph endpoint={'piani_fibra_region'} region={'Lombardia'} year={selectedYear}/>
+    ]
 
     useEffect(() => {
         const getEndpoints = async() => {
@@ -36,13 +42,13 @@ export default function Regionale() {
         
         if (keys.length === 0) return null;
         
-        const data = keys.map((key:string) => {
+        const data = keys.map((key:string, index) => {
             {console.log(endPoints[key])}
             return <Accordion.Item eventKey={key} key={key}>
                 <Accordion.Header>{key.charAt(0).toUpperCase() + key.slice(1).split('_').join(' ')}</Accordion.Header>
                 <Accordion.Body key={key}>
-                    <MyDropdown key={key} onYearChange={handleYearChange} />
-                    {endPoints[key] === 'line' ? <LineGraph endpoint={key} region={'Lombardia'} year={selectedYear}/> : <PieGraph endpoint={key} region={'Lombardia'} year={selectedYear}/>}
+                    {index > 1 ? <MyDropdown key={key} onYearChange={handleYearChange} /> : null}
+                    {components[index]}
                 </Accordion.Body>
             </Accordion.Item>
         });

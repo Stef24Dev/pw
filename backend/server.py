@@ -96,3 +96,7 @@ def piani_fibra_region_endPoint():
 
     df = regione_specifica(DF_ITALY, region)
     return piani_fibra_region(df, year)
+
+@app.route("/get_year")
+def get_year_endPoint():
+    return get_year()

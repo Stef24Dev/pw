@@ -23,6 +23,12 @@ def get_nazionale():
 def get_regionale():
     return {'cantieri_fwa_region': 'line', 'cantieri_fwa_region_anno': 'pie', 'piani_fwa_region': 'line', 'piani_fibra_region': 'line'}
 
+def get_year():
+    df = regione_specifica(readCsvFile(italy_geo), 'Lombardia')
+    anni_disponibili = sorted(df['Piano fibra (anno)'].unique())
+    print(f"anni dispèononedions {anni_disponibili}")
+    return anni_disponibili
+
 #Input: dataframe with the content of the csv file
 #Output: list of dataframe with the informations to draw the graphic
 #    1 cantieri in italia per la fibra (progettazione, esecuzione, terminati)
@@ -189,6 +195,6 @@ if debug_flag:
     # print()
     # print(f"Cantieri fwa region anno = {cantieri_fwa_region_anno(regione_specifica(readCsvFile(italy_geo), 'Lombardia'))}")
     # print()
-    print(f"Piani fwa region = {piani_fwa_region(regione_specifica(readCsvFile(italy_geo), 'Lombardia'), 2022)}")
+    # print(f"Piani fwa region = {piani_fwa_region(regione_specifica(readCsvFile(italy_geo), 'Lombardia'), 2022)}")
     # print()
-    # print(f"Piani fibra region = {piani_fibra_region(regione_specifica(readCsvFile(italy_geo), 'Lombardia'), 2022)}")
+    print(f"Piani fibra region = {piani_fibra_region(regione_specifica(readCsvFile(italy_geo), 'Lombardia'), 2022)}")

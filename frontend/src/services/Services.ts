@@ -2,7 +2,19 @@ import axios from "axios";
 
 const HOST = 'http://localhost:5000/';
 
-export async function getEndPoints(property: string) {
+export async function getProperties(property: string) {
+    const URL = HOST +  property;
+
+    try{
+        const response = await axios.get(URL);
+        return response.data;
+    } catch (error){
+        console.error("ERRORE: ", error);
+        return error;
+    }
+}
+
+export async function getYears(property: string) {
     const URL = HOST +  property;
 
     try{

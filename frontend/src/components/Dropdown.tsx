@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
+import { getProperties } from '../services/Services.ts';
 
 const data = [
   { name: 'Label1', value: 12, color: 'red' },
@@ -7,7 +8,19 @@ const data = [
   { name: 'Label3', value: 3, color: 'green' }
 ];
 
-const years = [2020, 2021, 2022, 2023, 2024]; // da fare chiamata API per gli anni
+let years = [2020, 2021, 2022, 2023, 2024]; // da fare chiamata API per gli anni
+
+const getYears = async () => {
+  const result = await getProperties('nazionale');
+
+  if (result['name'] !== 'AxiosError') {
+      console.log("cuiao "+result)
+      years = result;
+      // return result;
+  } else {
+      return [];
+  }
+}
 
 const MyDropdown = ({ onYearChange }) => {
   const [data, setData] = useState([]);

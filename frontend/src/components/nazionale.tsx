@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Accordion, Dropdown } from "react-bootstrap";
 import LineGraph from "./LineGraph.tsx";
 import PieGraph from "./PieGraph.tsx";
-import { getEndPoints } from "../services/Services.ts";
+import { getProperties } from "../services/Services.ts";
 import NetworkAlert from "./NetworkAlert.tsx";
 
 export default function Nazionale() {
@@ -12,7 +12,7 @@ export default function Nazionale() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const result = await getEndPoints('nazionale');
+            const result = await getProperties('nazionale');
 
             if (result['name'] !== 'AxiosError') {
                 setEndpoints(result);
