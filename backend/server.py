@@ -91,8 +91,6 @@ def piani_fibra_region_endPoint():
         data = request.get_json()
         region = data.get('region')
         year = data.get('year')
-    else:
-        region = ''
 
     df = regione_specifica(DF_ITALY, region)
     return piani_fibra_region(df, year)
@@ -100,3 +98,7 @@ def piani_fibra_region_endPoint():
 @app.route("/get_year")
 def get_year_endPoint():
     return get_year()
+
+@app.route("/get_region")
+def get_region_endPoint():
+    return get_region()

@@ -1,41 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Dropdown, DropdownButton } from 'react-bootstrap';
-import { getProperties } from '../services/Services.ts';
+import { Dropdown, DropdownButton, DropdownMenu } from 'react-bootstrap';
+import { getProperties, getRegion } from '../services/Services.ts';
+import axios from 'axios';
 
-const data = [
-  { name: 'Label1', value: 12, color: 'red' },
-  { name: 'Label2', value: 19, color: 'blue' },
-  { name: 'Label3', value: 3, color: 'green' }
-];
+let years = [2020, 2021, 2022, 2023];
 
-let years = [2020, 2021, 2022, 2023, 2024]; // da fare chiamata API per gli anni
-
-const getYears = async () => {
-  const result = await getProperties('nazionale');
-
-  if (result['name'] !== 'AxiosError') {
-      console.log("cuiao "+result)
-      years = result;
-      // return result;
-  } else {
-      return [];
-  }
-}
-
-const MyDropdown = ({ onYearChange }) => {
-  const [data, setData] = useState([]);
-  const [selectedYear, setSelectedYear] = useState(years[0]); // Imposta l'anno iniziale
+const YearDropdown = ({ onYearChange }) => {
+  const [selectedYear, setSelectedYear] = useState();
 
   useEffect(() => {
-    // const fetchData = async (year) => {
-    //   try {
-    //     const response = await axios.get(`/api/data?year=${year}`);
-    //     setData(response.data);
-    //   } catch (error) {
-    //     console.error("Error fetching data", error);
-    //   }
-    // };
-    // fetchData(selectedYear);
     onYearChange(selectedYear);
   }, [selectedYear, onYearChange]);
 
@@ -44,7 +17,7 @@ const MyDropdown = ({ onYearChange }) => {
   };
 
   return (
-    <DropdownButton id="dropdown-basic-button" title={`Select Year: ${selectedYear}`} onSelect={handleSelectYear}>
+    <DropdownButton id="dropdown-basic-buttonYear" title={`Select Year: ${selectedYear}`} onSelect={handleSelectYear}>
       {years.map((year, index) => (
         <Dropdown.Item key={index} eventKey={year}>
           {year}
@@ -54,4 +27,34 @@ const MyDropdown = ({ onYearChange }) => {
   );
 };
 
-export default MyDropdown;
+const RegionDropdown = ({ onRegionChange }) => {
+  const [selectedRegion, setSelectedRegion] = useState();
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const regions = await getRegion('get_region')
+      setData(regions);
+    };
+
+    fetchData();
+
+    onRegionChange(selectedRegion);
+  }, [selectedRegion, onRegionChange]);
+
+  const handleSelectRegion = (Region) => {
+    setSelectedRegion(Region);
+  };
+
+  return (
+    <DropdownButton id="dropdown-basic-button" title={`Select Region: ${selectedRegion !== undefined ? selectedRegion : "Not selected"}`} onSelect={handleSelectRegion} className='dropdown'>
+        {data.map((region, index) => (
+          <Dropdown.Item key={index} eventKey={region}>
+            {region}
+          </Dropdown.Item>
+        ))}
+    </DropdownButton>
+  );
+};
+
+export { YearDropdown, RegionDropdown };

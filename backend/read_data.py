@@ -29,6 +29,11 @@ def get_year():
     print(f"anni dispèononedions {anni_disponibili}")
     return anni_disponibili
 
+def get_region():
+    df = readCsvFile(stato_lavori)
+    regioni = df['Regione'].unique()
+    return regioni.tolist()
+
 #Input: dataframe with the content of the csv file
 #Output: list of dataframe with the informations to draw the graphic
 #    1 cantieri in italia per la fibra (progettazione, esecuzione, terminati)
@@ -197,4 +202,6 @@ if debug_flag:
     # print()
     # print(f"Piani fwa region = {piani_fwa_region(regione_specifica(readCsvFile(italy_geo), 'Lombardia'), 2022)}")
     # print()
-    print(f"Piani fibra region = {piani_fibra_region(regione_specifica(readCsvFile(italy_geo), 'Lombardia'), 2022)}")
+    # print(f"Piani fibra region = {piani_fibra_region(regione_specifica(readCsvFile(italy_geo), 'Lombardia'), 2022)}")
+
+    get_region()

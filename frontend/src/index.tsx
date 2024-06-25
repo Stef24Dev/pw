@@ -10,6 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // TODO Grafico a torta in modalità mobile non si vedono le scritte
 // TODO abbassare la legenda perche nel region va sopra la legenda
 // TODO togliere year dalle post in cui non serve in flask 
+// TODO fare la dropdown region scrollable
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(<App />);

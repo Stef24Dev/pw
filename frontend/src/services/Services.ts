@@ -72,3 +72,14 @@ export async function postGraphData(endpoint: string, region: string, year?: num
         console.error("Errore è = ", error);
     }
 }
+
+export async function getRegion(endpoint: string){
+    const url = HOST + endpoint;
+    try {
+        const response = await axios.get(url);
+        console.log("le regioni sono " +response.data)
+        return response.data;
+    } catch (error) {
+        console.error(error);
+    }
+}
