@@ -26,7 +26,6 @@ function PianiFwaRegion( props: {
             if(selectedRegion === undefined){
                 result = await getGraphData(endpoint);
             } else {
-                console.log("regoin "+selectedRegion+" year "+selectedYear)
                 result = await postGraphData(endpoint, selectedRegion, selectedYear);
             }
 

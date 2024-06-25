@@ -50,7 +50,6 @@ def cantieri_fwa_region_endPoint():
     if request.method == 'POST':
         data = request.get_json()
         region = data.get('region')
-        year = data.get('year')
     else:
         region = ''
 
@@ -64,7 +63,6 @@ def cantieri_fwa_region_anno_endPoint():
     if request.method == 'POST':
         data = request.get_json()
         region = data.get('region')
-        year = data.get('year')
     else:
         region = ''
 
@@ -102,3 +100,6 @@ def get_year_endPoint():
 @app.route("/get_region")
 def get_region_endPoint():
     return get_region()
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)

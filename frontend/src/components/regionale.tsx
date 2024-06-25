@@ -5,11 +5,14 @@ import CantieriFwaRegion from "../regions/cantieriFwaRegion.tsx";
 import CantieriFwaRegionAnno from "../regions/cantieriFwaRegionAnno.tsx";
 import PianiFibraRegion from "../regions/pianiFibraRegion.tsx";
 import PianiFwaRegion from "../regions/pianiFwaRegion.tsx";
+import NetworkAlert from "./NetworkAlert.tsx";
 
 export default function Regionale() {
     const HOST = 'http://localhost:5000/';
     const URL = HOST +  'regionale'
     const [endPoints, setEndpoints] = useState({});
+    const [isConnected, setIsConnected] = useState(false);
+    const [error, setError] = useState({});
 
     const components = [
         <CantieriFwaRegion endpoint={'cantieri_fwa_region'}/>,
@@ -22,9 +25,11 @@ export default function Regionale() {
         const getEndpoints = async() => {
             try{
                 const response = await axios.get(URL);
+                setIsConnected(true);
                 setEndpoints(response.data);
             } catch (error){
                 console.error("ERRORE: ", error)
+                setError(error);
             }
         };
         getEndpoints();
@@ -51,7 +56,7 @@ export default function Regionale() {
         <div className="containerDiv">
             <div className="accordionContainer">
                 <Accordion>
-                    {acordion(endPoints)}
+                    {isConnected ? acordion(endPoints) : <NetworkAlert error={error}/>}
                 </Accordion>
             </div>
         </div>

@@ -1,0 +1,29 @@
+version: '1.1'
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend:/app/backend
+      - ./DatiCsv:/app/backend/DatiCsv
+    networks:
+      - mynetwork
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app/frontend
+    networks:
+      - mynetwork
+    depends_on:
+      - backend
+
+networks:
+  mynetwork:

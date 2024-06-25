@@ -28,12 +28,10 @@ export default function Nazionale() {
     const acordion = (info:object) => {
         
         const keys = Object.keys(info);
-        console.log(keys);
         
         if (keys.length === 0) return null;
         
         const data = keys.map((key:string) => {
-            {console.log(endPoints[key])}
             return <Accordion.Item eventKey={key} key={key}>
                 <Accordion.Header>{key.charAt(0).toUpperCase() + key.slice(1).split('_').join(' ')}</Accordion.Header>
                 <Accordion.Body className="pie">

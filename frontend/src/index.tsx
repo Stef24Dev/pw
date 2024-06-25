@@ -4,18 +4,7 @@ import App from './App.tsx';
 import reportWebVitals from './reportWebVitals.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-// TODO cancellare o mui o bootstrap per il design
-// TODO fare un footer magari, con le mie info, git oppure bo
-// TODO gestire quando una chiamata api non riesce (se no non si caricano nemmeno le pagine) --> tipo modal --> Done
-// TODO Grafico a torta in modalità mobile non si vedono le scritte
-// TODO abbassare la legenda perche nel region va sopra la legenda
-// TODO togliere year dalle post in cui non serve in flask 
-// TODO fare la dropdown region scrollable
-
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(<App />);
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
