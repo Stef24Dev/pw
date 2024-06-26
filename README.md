@@ -1,8 +1,8 @@
-# Progetto di Tesi
+# Project work
 
 ## Descrizione del Progetto
 
-Questo progetto di tesi rappresenta un'applicazione web dockerizzata composta da due container distinti. Il frontend è gestito con React, mentre il backend utilizza il framework Python Flask. Il backend legge dati da due file CSV per fornire le informazioni richieste al frontend.
+Questo progetto rappresenta un'applicazione web dockerizzata composta da due container distinti. Il frontend è gestito con React, mentre il backend utilizza il framework Python Flask. Il backend legge dati da due file CSV per fornire le informazioni richieste al frontend.
 
 ### Struttura del Progetto
 
@@ -22,3 +22,24 @@ Segui questi passaggi per clonare e avviare il progetto sul tuo ambiente locale:
 
    ```sh
    git clone https://github.com/username/repository.git
+
+2. **Accedi alla cartella principale del progetto:**
+
+   ```sh
+   cd pw
+
+3. **Avvia i container Docker utilizzando Docker Compose:**
+
+   ```sh
+   docker-compose up
+
+4. **Una volta avviato aprire il browser dal link**
+
+   [localhost](http://localhost:3000)
+
+### Dettagli Tecnici
+## Frontend
+Il frontend dell'applicazione è stato sviluppato utilizzando React. Questo consente una gestione efficiente dello stato dell'applicazione e offre un'interfaccia utente reattiva.
+
+## Backend
+Il backend è implementato con Flask, un microframework Python che facilita lo sviluppo rapido di applicazioni web. Il backend legge dati da due file CSV, fornendo le informazioni richieste al frontend attraverso API RESTful.
