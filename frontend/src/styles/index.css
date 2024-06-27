@@ -1,4 +1,4 @@
-.ciao {
+.bg_header {
     background-color: #0192ff;
     /* border-radius: 20px; */
 }
@@ -10,8 +10,12 @@
     color: white;
 }
 
-.bg {
-    background-color: red;
+.bg_footer {
+    background-color: rgb(83, 83, 83);
+}
+
+.contact {
+    color:white;
 }
 
 .menu {

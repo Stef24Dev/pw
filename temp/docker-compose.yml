@@ -1,0 +1,31 @@
+version: "3"
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - "5000"
+    depends_on:
+        - mssql
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - app
+    ports:
+      - "8080:80"
+  mssql:
+    container_name: sql-server
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    restart: always
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "qawsQAWS1234!"
+    ports:
+      - 1433:1433
+    volumes:
+      - appVolume:/var/opt/mssql
+      
+volumes:
+  appVolume:

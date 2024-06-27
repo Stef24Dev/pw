@@ -17,5 +17,4 @@ COPY backend .
 EXPOSE 5000
 
 # Comando per avviare l'applicazione Flask
-CMD ["python", "server.py", "--host=0.0.0.0"]
-
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "server:backend"]

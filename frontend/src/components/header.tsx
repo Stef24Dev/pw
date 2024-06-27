@@ -10,7 +10,7 @@ import * as Icon from 'react-bootstrap-icons'
 export default function HeaderStef() {
     return <>
         <Container fluid>
-            <Row className="ciao">
+            <Row className="bg_header">
                 <Col xs="auto" className="menu">
                     <Dropdown>
                         <Dropdown.Toggle variant="outline-light" id="dropdown-menu">
