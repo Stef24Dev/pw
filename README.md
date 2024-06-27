@@ -1,10 +1,45 @@
-### Project work Muntianu Stefan
+# Project work
 
-Project work for Fitstic ITS in devops and cloud
+## Descrizione del Progetto
 
-Analisi dei dati sulla distribuzione e cantieri sulla Fibra ed FWA in italia e nelle varie regioni
+Questo progetto rappresenta un'applicazione web dockerizzata composta da due container distinti. Il frontend è gestito con React, mentre il backend utilizza il framework Python Flask. Il backend legge dati da due file CSV per fornire le informazioni richieste al frontend.
 
-Utilizzo delle tecnologie:
-    Frontend --> React
-    Backend --> Flask e Pandas
-    Container --> Docker
+### Struttura del Progetto
+
+- **Frontend**: Implementato con React, offre un'interfaccia utente interattiva e dinamica.
+- **Backend**: Sviluppato con Flask, gestisce le richieste del frontend e legge i dati da due file CSV.
+
+## Requisiti
+
+- [Docker](https://www.docker.com/get-started)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+
+## Installazione e Avvio del Progetto in Locale
+
+Segui questi passaggi per clonare e avviare il progetto sul tuo ambiente locale:
+
+1. **Clona il repository del progetto:**
+
+   ```sh
+   git clone https://github.com/username/repository.git
+
+2. **Accedi alla cartella principale del progetto:**
+
+   ```sh
+   cd pw
+
+3. **Avvia i container Docker utilizzando Docker Compose:**
+
+   ```sh
+   docker-compose up
+
+4. **Una volta avviato aprire il browser dal link**
+
+   [localhost](http://localhost:3000)
+
+### Dettagli Tecnici
+## Frontend
+Il frontend dell'applicazione è stato sviluppato utilizzando React. Questo consente una gestione efficiente dello stato dell'applicazione e offre un'interfaccia utente reattiva.
+
+## Backend
+Il backend è implementato con Flask, un microframework Python che facilita lo sviluppo rapido di applicazioni web. Il backend legge dati da due file CSV, fornendo le informazioni richieste al frontend attraverso API RESTful.
