@@ -1,6 +1,6 @@
 .bg_header {
     background-color: #0192ff;
-    /* border-radius: 20px; */
+    width: 100%;
 }
 
 .titolo {
@@ -10,16 +10,22 @@
     color: white;
 }
 
-.bg_footer {
-    background-color: rgb(83, 83, 83);
-}
-
-.contact {
-    color:white;
-}
-
 .menu {
     padding-top: 5px;
+}
+
+.footer_content {
+    font-size: medium;
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+    color: white;
+    padding-top: 20px;
+}
+
+.bg_footer {
+    background-color: rgb(83, 83, 83);
+    height: 100px;
+    width: 100%;
 }
 
 .home {

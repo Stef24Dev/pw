@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const HOST = 'http://localhost:5000/';
+const HOST = 'http://app:80/';
 
 export async function getProperties(property: string) {
     const URL = HOST +  property;
