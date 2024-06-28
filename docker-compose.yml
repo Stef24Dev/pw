@@ -1,14 +1,14 @@
-version: '1.2'
+version: '2.0'
 services:
-  backend:
+  app:
     build:
       context: .
       dockerfile: backend/Dockerfile
     ports:
-      - "5000:5000"
+      - "5000"
     volumes:
-      - ./backend:/app/backend
-      - ./DatiCsv:/app/backend/DatiCsv
+      - ./backend:/app
+      - ./DatiCsv:/app/DatiCsv
     networks:
       - mynetwork
 
@@ -23,16 +23,20 @@ services:
     networks:
       - mynetwork
     depends_on:
-      - backend
+      - app
   
   load_balancer:
     image: nginx:latest
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
-      - backend
+      - app
     ports:
-      - "8080:80"
+      - "80:80"
+    networks:
+      - mynetwork
 
 networks:
   mynetwork:
+
+# "docker-compose up --scale backend=3"

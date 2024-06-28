@@ -21,6 +21,10 @@ def get_df_italy(file_name: str):
 DF_LAVORI = get_df_lavori(file_name[0])
 DF_ITALY = get_df_italy(file_name[1])
 
+@app.route("/")
+def simple_endPoint():
+    return "Hello world"
+
 @app.route("/nazionale")
 def get_nazionale_endPoint():
     return get_nazionale()

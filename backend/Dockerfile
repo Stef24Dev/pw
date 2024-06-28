@@ -4,7 +4,7 @@
 FROM python:3.9-slim
 
 # Imposta il working directory all'interno del container
-WORKDIR /app/backend
+WORKDIR /app
 
 # Copia il requirements.txt e installa le dipendenze
 COPY backend/requirements.txt .
@@ -17,4 +17,4 @@ COPY backend .
 EXPOSE 5000
 
 # Comando per avviare l'applicazione Flask
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "server:backend"]
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "server:app"]
