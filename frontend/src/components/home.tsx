@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 export default function Home() {
     return <>            
-        <Container className="home">
+        <div className="home">
             <Row className="choice">
                 Introduzione<br /><br />
                 Il progetto Banda Ultra Larga (BUL) rappresenta un fondamentale pilastro nell'evoluzione delle infrastrutture di connettività, mirando a fornire accesso ad Internet ad alta velocità a una vasta gamma di utenti.<br />
@@ -31,8 +31,8 @@ export default function Home() {
                     Vuol dire che la fibra è in funzione con lavori terminati e collaudati.
                 </div>
             </Row>
-        </Container>
-        <Row>
+        </div>
+        <Row className="buttons">
             <Col>
                 <Link className="link" to='/nazionale'>Analisi sulla Fibra ed FWA a livello nazionale</Link>
             </Col>

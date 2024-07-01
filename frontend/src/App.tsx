@@ -9,6 +9,7 @@ import FooterStef from './components/Footer.tsx';
 export default function App() {
   return <>
     <Router>
+      <div className='app'>
       <HeaderStef />
       <Routes>
         <Route path="/" element={<Home/>}/>
@@ -16,6 +17,7 @@ export default function App() {
         <Route path="/regionale" element={<Regionale/>}/>
       </Routes>
       <FooterStef />
+      </div>
     </Router>
   </>
 }

@@ -1,6 +1,12 @@
+.app {
+    width: 100%;
+    overflow-x: hidden; /* Evita lo scorrimento orizzontale */
+  }
+
 .bg_header {
     background-color: #0192ff;
     width: 100%;
+    margin: 0;
 }
 
 .titolo {
@@ -29,6 +35,16 @@
     position: fixed;
     left: 0;
     bottom: 0;
+    transition: transform 0.3s ease-in-out;
+    transform: translateY(100%); /* Nasconde il footer inizialmente */
+}
+
+.bg_footer.visible {
+    transform: translateY(0); /* Mostra il footer quando è visibile */
+}
+
+.bg_footer.hidden {
+    transform: translateY(100%); /* Nasconde di nuovo il footer */
 }
 
 .home {
@@ -68,6 +84,10 @@
 
 .link:hover {
     background-color: #003e6d;
+}
+
+.buttons{
+    margin-bottom: 100px;
 }
 
 .glossary {
@@ -153,4 +173,10 @@
     overflow-y: auto;
     overflow-x: hidden;
     max-height: 200px;
-  }
+}
+
+body {
+  margin: 0;
+  width: 100%;
+  overflow-x: hidden; /* Evita lo scorrimento orizzontale */
+}
