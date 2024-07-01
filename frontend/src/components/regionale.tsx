@@ -8,7 +8,7 @@ import PianiFwaRegion from "../regions/pianiFwaRegion.tsx";
 import NetworkAlert from "./NetworkAlert.tsx";
 
 export default function Regionale() {
-    const HOST = 'http://app:80/';
+    const HOST = 'http://localhost:80/api/';
     const URL = HOST +  'regionale'
     const [endPoints, setEndpoints] = useState({});
     const [isConnected, setIsConnected] = useState(false);

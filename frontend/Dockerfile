@@ -1,6 +1,4 @@
-# Dockerfile per il frontend React
-
-# Usa un'immagine di Node.js come base
+# Dockerfile per React
 FROM node:14-alpine
 
 # Imposta il working directory all'interno del container
@@ -17,8 +15,8 @@ COPY frontend .
 # Comando per buildare l'applicazione React
 RUN npm run build
 
-# Esponi la porta su cui React è in ascolto (di solito la porta 3000)
+# Esponi la porta su cui React è in ascolto
 EXPOSE 3000
 
 # Comando per avviare il server di sviluppo di React
-CMD ["npm", "start"]
+CMD ["yarn", "start"]

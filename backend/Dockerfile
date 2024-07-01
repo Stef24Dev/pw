@@ -1,6 +1,4 @@
-# Dockerfile per il backend Flask
-
-# Usa un'immagine di Python come base
+# Dockerfile Flask
 FROM python:3.9-slim
 
 # Imposta il working directory all'interno del container
@@ -13,7 +11,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copia il resto del codice dell'applicazione
 COPY backend .
 
-# Esponi la porta su cui Flask sta in ascolto (di solito la porta 5000)
+# Esponi la porta su cui Flask sta in ascolto
 EXPOSE 5000
 
 # Comando per avviare l'applicazione Flask
