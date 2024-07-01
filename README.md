@@ -21,21 +21,21 @@ Segui questi passaggi per clonare e avviare il progetto sul tuo ambiente locale:
 1. **Clona il repository del progetto:**
 
    ```sh
-   git clone https://github.com/username/repository.git
+   git clone https://github.com/Stef24Dev/pw.git
 
 2. **Accedi alla cartella principale del progetto:**
 
    ```sh
    cd pw
 
-3. **Avvia i container Docker utilizzando Docker Compose:**
+3. **Avvia i container Docker e scegli quanto ridondare l'applicazione utilizzando Docker Compose:**
 
    ```sh
-   docker-compose up
+   docker-compose up --scale app=3
 
 4. **Una volta avviato aprire il browser dal link**
 
-   [localhost](http://localhost:3000)
+   [progetto_bul](http://localhost)
 
 ### Dettagli Tecnici
 ## Frontend
