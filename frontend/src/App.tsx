@@ -1,8 +1,8 @@
 import React from 'react';
 import HeaderStef from './components/header.tsx';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Nazionale from './components/Nazionale.tsx';
-import Regionale from './components/Regionale.tsx';
+import Nazionale from './components/nazionale.tsx';
+import Regionale from './components/regionale.tsx';
 import Home from './components/home.tsx';
 import FooterStef from './components/Footer.tsx';
 
