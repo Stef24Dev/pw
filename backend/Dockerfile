@@ -5,11 +5,11 @@ FROM python:3.9-slim
 WORKDIR /app
 
 # Copia il requirements.txt e installa le dipendenze
-COPY backend/requirements.txt .
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copia il resto del codice dell'applicazione
-COPY backend .
+COPY . .
 
 # Esponi la porta su cui Flask sta in ascolto
 EXPOSE 5000
