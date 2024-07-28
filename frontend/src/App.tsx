@@ -1,5 +1,5 @@
 import React from 'react';
-import HeaderStef from './components/Header.tsx';
+import HeaderStef from './components/header.tsx';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Nazionale from './components/Nazionale.tsx';
 import Regionale from './components/Regionale.tsx';
