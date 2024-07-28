@@ -5,12 +5,12 @@ FROM node:14-alpine
 WORKDIR /app/frontend
 
 # Copia il package.json e installa le dipendenze
-COPY frontend/package.json .
-COPY frontend/package-lock.json .
+COPY package.json .
+COPY package-lock.json .
 RUN npm install
 
 # Copia il resto del codice dell'applicazione
-COPY frontend .
+COPY . .
 
 # Comando per buildare l'applicazione React
 RUN npm run build
